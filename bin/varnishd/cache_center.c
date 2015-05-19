@@ -495,9 +495,11 @@ cnt_error(struct sess *sp)
 
 
 	/* We always close when we take this path */
-	sp->doclose = "error";
+	/* sp->doclose = "error"; */
+    if (sp->err_code != 888) {
+        sp->doclose = "error";
+    }
 	sp->wantbody = 1;
-
 	assert(sp->handling == VCL_RET_DELIVER);
 	sp->err_code = 0;
 	sp->err_reason = NULL;
